@@ -19,7 +19,7 @@ import com.cyclic.beerapi.database.BeerService;
 import com.cyclic.beerapi.vo.Beer;
 
 @RestController
-@RequestMapping(value = "/api/v1/beer", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(value = "/api/v1/admin/beer", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class BeerController {
 
 	private BeerService beerService;
