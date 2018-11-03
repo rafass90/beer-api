@@ -5,7 +5,7 @@ import org.springframework.data.annotation.Id;
 public class Beer {
 
 	@Id
-	private Long id;
+	private String id;
 	
 	private String name;
 	
@@ -20,6 +20,10 @@ public class Beer {
 		this.name = name;
 		this.minTemperature = minTemperature;
 		this.maxTemperature = maxTemperature;
+	}
+	
+	public String getId() {
+		return id;
 	}
 
 	public String getName() {

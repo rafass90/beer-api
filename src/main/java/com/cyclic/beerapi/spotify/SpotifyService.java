@@ -27,9 +27,6 @@ public class SpotifyService {
 	public SpotifyService(SpotifyProperties spotifyProperties) throws SpotifyWebApiException, IOException {
 		this.spotifyProperties = spotifyProperties;
 
-		LOGGER.info(this.spotifyProperties.getClientID());
-		LOGGER.info(this.spotifyProperties.getClientSecret());
-
 		spotifyApi = new SpotifyApi.Builder()
 				.setClientId(this.spotifyProperties.getClientID())
 				.setClientSecret(this.spotifyProperties.getClientSecret())
@@ -48,9 +45,6 @@ public class SpotifyService {
 		try {
 			final Paging<PlaylistSimplified> playlist = spotifyApi.searchPlaylists("RAP").market(CountryCode.BR).build()
 					.execute();
-
-			LOGGER.info(String.valueOf(playlist.getTotal()));
-			LOGGER.info(String.valueOf(playlist.getItems()[0]));
 
 			any = String.valueOf(playlist.getItems()[0]);
 		} catch (IOException | SpotifyWebApiException e) {
