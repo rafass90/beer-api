@@ -12,6 +12,7 @@ import com.wrapper.spotify.SpotifyApi;
 import com.wrapper.spotify.exceptions.SpotifyWebApiException;
 import com.wrapper.spotify.model_objects.credentials.ClientCredentials;
 import com.wrapper.spotify.model_objects.specification.Paging;
+import com.wrapper.spotify.model_objects.specification.Playlist;
 import com.wrapper.spotify.model_objects.specification.PlaylistSimplified;
 import com.wrapper.spotify.requests.authorization.client_credentials.ClientCredentialsRequest;
 
@@ -40,16 +41,22 @@ public class SpotifyService {
 		spotifyApi = spotifyApi;
 	}
 
-	public String getPlaylist_Sync() {
-		String any = null;
+	public Playlist getPlaylistByName(String name) {
+		Playlist playlist = null;
 		try {
-			final Paging<PlaylistSimplified> playlist = spotifyApi.searchPlaylists("RAP").market(CountryCode.BR).build()
+			Paging<PlaylistSimplified> playlistSimp = spotifyApi.searchPlaylists(name)
+					.market(CountryCode.BR)
+					.build()
+					.execute();
+			
+			
+			playlist = spotifyApi.getPlaylist(playlistSimp.getItems()[0].getId())
+					.build()
 					.execute();
 
-			any = String.valueOf(playlist.getItems()[0]);
 		} catch (IOException | SpotifyWebApiException e) {
 			LOGGER.warning(e.getMessage());
 		}
-		return any;
+		return playlist;
 	}
 }
