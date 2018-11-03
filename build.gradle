@@ -24,7 +24,9 @@ repositories {
 }
 
 dependencies {
+	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation('org.springframework.boot:spring-boot-starter-actuator')
 	implementation('org.springframework.boot:spring-boot-starter-data-mongodb')
+	implementation('se.michaelthelin.spotify:spotify-web-api-java:2.1.1')
 	testImplementation('org.springframework.boot:spring-boot-starter-test')
 }
