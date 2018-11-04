@@ -7,15 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cyclic.beerapi.domain.vo.BeerStyle;
-import com.cyclic.beerapi.repository.BeerRepositoryDAO;
+import com.cyclic.beerapi.repository.BeerStyleRepositoryDAO;
 
 @Service
 public class BeerStyleService {
 
-	private BeerRepositoryDAO beerRepository;
+	private BeerStyleRepositoryDAO beerRepository;
 	
 	@Autowired
-	public BeerStyleService(BeerRepositoryDAO beerRepository) {
+	public BeerStyleService(BeerStyleRepositoryDAO beerRepository) {
 		this.beerRepository = beerRepository;
 	}
 	

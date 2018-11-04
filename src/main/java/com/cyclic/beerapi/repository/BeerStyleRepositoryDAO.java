@@ -12,15 +12,15 @@ import org.springframework.stereotype.Service;
 import com.cyclic.beerapi.domain.vo.BeerStyle;
 
 @Service
-public class BeerRepositoryDAO{
+public class BeerStyleRepositoryDAO{
 	
-	private BeerRepository beerRepository;
+	private BeerStyleRepository beerStyleRepository;
 
 	private MongoTemplate mongoTemplate;
 	
 	@Autowired
-	public BeerRepositoryDAO(BeerRepository beerRepository, MongoTemplate mongoTemplate) {
-		this.beerRepository = beerRepository;
+	public BeerStyleRepositoryDAO(BeerStyleRepository beerStyleRepository, MongoTemplate mongoTemplate) {
+		this.beerStyleRepository = beerStyleRepository;
 		this.mongoTemplate = mongoTemplate;
 	}
 	
@@ -33,24 +33,24 @@ public class BeerRepositoryDAO{
 	}
 
 	public List<BeerStyle> findAll() {
-		return beerRepository.findAll();
+		return beerStyleRepository.findAll();
 	}
 
 	public BeerStyle insert(BeerStyle beerStyle) {
-		return this.beerRepository.insert(beerStyle);
+		return this.beerStyleRepository.insert(beerStyle);
 	}
 
 	public BeerStyle save(BeerStyle beerStyle) {
-		return beerRepository.save(beerStyle);
+		return beerStyleRepository.save(beerStyle);
 	}
 
 	public Optional<BeerStyle> findById(String id) {
-		Optional<BeerStyle> beerStyle = beerRepository.findById(id);
+		Optional<BeerStyle> beerStyle = beerStyleRepository.findById(id);
 		return beerStyle;
 	}
 
 	public void deleteById(String id) {
-		beerRepository.deleteById(id);
+		beerStyleRepository.deleteById(id);
 	}
 	
 }
