@@ -38,12 +38,12 @@ public class PubService {
 	public BeerStyle suggestIdealBeer(Double temperature){
 		List<BeerStyle> beerStyles = beerStyleService.findByTemperature(temperature);
 
-		BeerStyle beerStyle = findOnceBeerStyleWithMinimumDifference(beerStyles, temperature);
+		BeerStyle beerStyle = findFirstBeerStyle(beerStyles, temperature);
 		
 		return beerStyle;
 	}
 	
-	private BeerStyle findOnceBeerStyleWithMinimumDifference(List<BeerStyle> beerStyles, Double temperature) {
+	private BeerStyle findFirstBeerStyle(List<BeerStyle> beerStyles, Double temperature) {
 		return beerStyles.stream()
 		.map(b -> new BeerStyleWithTempDifference(b, temperature))
 		.sorted()

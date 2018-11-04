@@ -1,4 +1,4 @@
-package com.cyclic.beerapi;
+package com.cyclic.beerapi.domain;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.equalTo;

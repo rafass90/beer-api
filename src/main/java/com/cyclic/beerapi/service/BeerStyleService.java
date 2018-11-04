@@ -40,7 +40,7 @@ public class BeerStyleService {
 	}
 	
 	public BeerStyle update(BeerStyle beerStyle, String id) {
-		
+		beerStyle.setId(id);
 		return beerRepository.save(beerStyle);
 	}
 	

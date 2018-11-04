@@ -33,7 +33,7 @@ public class BeerStyleWithTempDifference implements Comparable<BeerStyleWithTemp
 
         if (tempDifference != 0) {
            return tempDifference;
-        } 
+        }
 
         return this.getBeer().getName().compareTo(o.getBeer().getName());
 	}

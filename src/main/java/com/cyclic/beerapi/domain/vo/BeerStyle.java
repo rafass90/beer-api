@@ -52,5 +52,5 @@ public class BeerStyle {
 	public Double getMaxTemperature() {
 		return maxTemperature;
 	}
-
+	
 }

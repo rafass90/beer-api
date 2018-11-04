@@ -1,8 +1,12 @@
-package com.cyclic.beerapi;
+package com.cyclic.beerapi.domain;
 
+import static java.util.stream.Collectors.toList;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
+
+import java.util.Arrays;
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -92,6 +96,44 @@ public class BeerStyleDecoratorTest {
 		BeerStyleWithTempDifference b1 = new BeerStyleWithTempDifference(beer1, null);
 		
 		assertThat(b1.calculateAverageTemperature(), is(Double.parseDouble("1.0")));
+		
+	}
+
+	@Test
+	public void shouldTestOrdering(){
+		Double temp = 0.0;
+		BeerStyleWithTempDifference b1 = new BeerStyleWithTempDifference(new BeerStyle("b1", -2.0, 2.0), temp);
+		BeerStyleWithTempDifference b2 = new BeerStyleWithTempDifference(new BeerStyle("b2", -2.0, 2.5), temp);
+		BeerStyleWithTempDifference b3 = new BeerStyleWithTempDifference(new BeerStyle("b3", -2.0, 4.0), temp);
+		
+		final List orderedList = Arrays.asList(b1, b2, b3)
+		.stream()
+		.sorted()
+		.collect(toList());
+		
+		assertThat(orderedList.get(0), is(b1));
+		assertThat(orderedList.get(1), is(b2));
+		assertThat(orderedList.get(2), is(b3));
+		
+	}
+	
+	@Test
+	public void shouldTestOrderingWithSameMedia(){
+		Double temp = 0.0;
+		BeerStyleWithTempDifference b1 = new BeerStyleWithTempDifference(new BeerStyle("aaa", -2.0, -1.0), temp);
+		BeerStyleWithTempDifference b2 = new BeerStyleWithTempDifference(new BeerStyle("aab", -2.0, -1.0), temp);
+		BeerStyleWithTempDifference b3 = new BeerStyleWithTempDifference(new BeerStyle("yyy", -2.0, -1.0), temp);
+		
+		final List<BeerStyleWithTempDifference> orderedList = Arrays.asList(b1, b2, b3)
+		.stream()
+		.peek(b -> System.out.println(b.getBeer().getName()))
+		.sorted()
+		.peek(b -> System.out.println(b.getBeer().getName()))
+		.collect(toList());
+		
+		assertThat(orderedList.get(0), is(b1));
+		assertThat(orderedList.get(1), is(b2));
+		assertThat(orderedList.get(2), is(b3));
 		
 	}
 	
