@@ -20,15 +20,15 @@ import com.wrapper.spotify.model_objects.specification.Track;
 import com.wrapper.spotify.requests.authorization.client_credentials.ClientCredentialsRequest;
 
 @Service
-public class SpotifyService {
-	private final static Logger LOGGER = Logger.getLogger(SpotifyService.class.getName());
+public class SpotifyRepository{
+	private final static Logger LOGGER = Logger.getLogger(SpotifyRepository.class.getName());
 
 	private SpotifyProperties spotifyProperties;
 
 	private SpotifyApi spotifyApi;
 
 	@Autowired
-	public SpotifyService(SpotifyProperties spotifyProperties) throws SpotifyWebApiException, IOException {
+	public SpotifyRepository(SpotifyProperties spotifyProperties) throws SpotifyWebApiException, IOException {
 		this.spotifyProperties = spotifyProperties;
 
 		spotifyApi = new SpotifyApi.Builder()
@@ -40,8 +40,6 @@ public class SpotifyService {
 		ClientCredentialsRequest clientCredentialsRequest = spotifyApi.clientCredentials().build();
 		final ClientCredentials clientCredentials = clientCredentialsRequest.execute();
 		spotifyApi.setAccessToken(clientCredentials.getAccessToken());
-
-		this.spotifyApi = spotifyApi;
 	}
 
 	public PlaylistSimplified getPlaylistByName(String name) {
