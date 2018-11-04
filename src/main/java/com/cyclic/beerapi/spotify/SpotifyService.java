@@ -46,9 +46,9 @@ public class SpotifyService {
 		try {
 			Paging<PlaylistSimplified> playlistSimp = spotifyApi.searchPlaylists(name)
 					.market(CountryCode.BR)
+					.limit(1)
 					.build()
 					.execute();
-			
 			
 			playlist = spotifyApi.getPlaylist(playlistSimp.getItems()[0].getId())
 					.build()

@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cyclic.beerapi.database.BeerRepositoryDAO;
+import com.cyclic.beerapi.repository.BeerRepositoryDAO;
 import com.cyclic.beerapi.vo.Beer;
 
 @Service
@@ -33,8 +33,10 @@ public class BeerService {
 	}
 
 	public List<Beer> findByTemperature(Double temperature) {
-		List<Beer> beer = beerRepository.findBeerByTemperature(temperature);
-		return beer;
+		List<Beer> beers = beerRepository.findBeerByTemperature(temperature);
+		if(beers.isEmpty())
+			beers = beerRepository.findAll();
+		return beers;
 	}
 	
 	public Beer update(Beer beer, String id) {

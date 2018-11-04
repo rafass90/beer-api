@@ -1,4 +1,4 @@
-package com.cyclic.beerapi.database;
+package com.cyclic.beerapi.repository;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 

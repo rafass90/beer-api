@@ -1,4 +1,4 @@
-package com.cyclic.beerapi.database;
+package com.cyclic.beerapi.repository;
 
 import java.util.List;
 import java.util.Optional;
