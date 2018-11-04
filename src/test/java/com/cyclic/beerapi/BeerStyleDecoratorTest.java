@@ -37,7 +37,7 @@ public class BeerStyleDecoratorTest {
 		assertThat(b.calculateAverageTemperature(), is(Double.parseDouble("1.0")));
 		
 	}
-	
+
 	@Test
 	public void shouldCalculateAverageTemperatureWithDecimal(){
 		BeerStyle beer = new BeerStyle("beer", 2.0, -4.5);
