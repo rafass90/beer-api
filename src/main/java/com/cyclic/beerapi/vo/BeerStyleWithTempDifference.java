@@ -1,6 +1,6 @@
 package com.cyclic.beerapi.vo;
 
-public class BeerStyleWithTempDifference {
+public class BeerStyleWithTempDifference implements Comparable<BeerStyleWithTempDifference>{
 
 	private BeerStyle beerStyle;
 	
@@ -8,7 +8,7 @@ public class BeerStyleWithTempDifference {
 	
 	public BeerStyleWithTempDifference (BeerStyle beerStyle, Double temperature) {
 		this.beerStyle = beerStyle;
-		this.differenceTemperature = Math.abs(beerStyle.getAverageTemperature() - temperature);
+		this.differenceTemperature = calculateDifferenceTemperature(beerStyle, temperature);
 	}
 
 	public BeerStyle getBeer() {
@@ -19,4 +19,19 @@ public class BeerStyleWithTempDifference {
 		return differenceTemperature;
 	}
 
+	private double calculateDifferenceTemperature(BeerStyle beerStyle, Double temperature) {
+		return Math.abs(beerStyle.getAverageTemperature() - temperature);
+	}
+
+	@Override
+	public int compareTo(BeerStyleWithTempDifference o) {
+		int tempDifference = this.getDifferenceTemperature().compareTo(o.getDifferenceTemperature());
+
+        if (tempDifference != 0) {
+           return tempDifference;
+        } 
+
+        return this.getBeer().getName().compareTo(o.getBeer().getName());
+	}
+	
 }

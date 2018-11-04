@@ -10,12 +10,12 @@ import com.cyclic.beerapi.repository.BeerRepositoryDAO;
 import com.cyclic.beerapi.vo.BeerStyle;
 
 @Service
-public class BeerService {
+public class BeerStyleService {
 
 	private BeerRepositoryDAO beerRepository;
 	
 	@Autowired
-	public BeerService(BeerRepositoryDAO beerRepository) {
+	public BeerStyleService(BeerRepositoryDAO beerRepository) {
 		this.beerRepository = beerRepository;
 	}
 	

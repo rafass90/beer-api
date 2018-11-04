@@ -38,7 +38,7 @@ public class SpotifyService {
 		final ClientCredentials clientCredentials = clientCredentialsRequest.execute();
 		spotifyApi.setAccessToken(clientCredentials.getAccessToken());
 
-		spotifyApi = spotifyApi;
+		this.spotifyApi = spotifyApi;
 	}
 
 	public Playlist getPlaylistByName(String name) {
@@ -50,7 +50,8 @@ public class SpotifyService {
 					.build()
 					.execute();
 			
-			playlist = spotifyApi.getPlaylist(playlistSimp.getItems()[0].getId())
+			if(playlistSimp.getItems().length > 0)
+				playlist = spotifyApi.getPlaylist(playlistSimp.getItems()[0].getId())
 					.build()
 					.execute();
 

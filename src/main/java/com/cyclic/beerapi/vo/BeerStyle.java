@@ -41,5 +41,5 @@ public class BeerStyle {
 	public Double getAverageTemperature() {
 		return Double.sum(minTemperature, maxTemperature) / 2;
 	}
-	
+
 }
