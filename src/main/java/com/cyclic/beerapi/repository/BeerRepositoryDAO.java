@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
-import com.cyclic.beerapi.vo.Beer;
+import com.cyclic.beerapi.vo.BeerStyle;
 
 @Service
 public class BeerRepositoryDAO{
@@ -24,29 +24,29 @@ public class BeerRepositoryDAO{
 		this.mongoTemplate = mongoTemplate;
 	}
 	
-	public List<Beer> findBeerByTemperature(Double temperature){
+	public List<BeerStyle> findBeerByTemperature(Double temperature){
 		Query query = new Query();
 		query.addCriteria(Criteria.where("minTemperature").lte(temperature));
 		query.addCriteria(Criteria.where("maxTemperature").gte(temperature));
-		List<Beer> beers = mongoTemplate.find(query,Beer.class);
-		return beers;
+		List<BeerStyle> beerStyles = mongoTemplate.find(query,BeerStyle.class);
+		return beerStyles;
 	}
 
-	public List<Beer> findAll() {
+	public List<BeerStyle> findAll() {
 		return beerRepository.findAll();
 	}
 
-	public Beer insert(Beer beer) {
-		return this.beerRepository.insert(beer);
+	public BeerStyle insert(BeerStyle beerStyle) {
+		return this.beerRepository.insert(beerStyle);
 	}
 
-	public Beer save(Beer beer) {
-		return beerRepository.save(beer);
+	public BeerStyle save(BeerStyle beerStyle) {
+		return beerRepository.save(beerStyle);
 	}
 
-	public Optional<Beer> findById(String id) {
-		Optional<Beer> beer = beerRepository.findById(id);
-		return beer;
+	public Optional<BeerStyle> findById(String id) {
+		Optional<BeerStyle> beerStyle = beerRepository.findById(id);
+		return beerStyle;
 	}
 
 	public void deleteById(String id) {

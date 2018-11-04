@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cyclic.beerapi.service.BeerService;
-import com.cyclic.beerapi.vo.Beer;
+import com.cyclic.beerapi.vo.BeerStyle;
 
 @RestController
 @RequestMapping(value = "/api/v1/admin/beer", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -35,8 +35,8 @@ public class BeerController {
 	}
 
 	@PostMapping(headers = "Accept=application/json")
-	public ResponseEntity<String> addBeer(@Valid @RequestBody Beer beer) {
-		String id = beerService.add(beer);
+	public ResponseEntity<String> addBeer(@Valid @RequestBody BeerStyle beerStyle) {
+		String id = beerService.add(beerStyle);
 		return new ResponseEntity<String>(id, HttpStatus.CREATED);
 	}
 
@@ -47,8 +47,8 @@ public class BeerController {
 	}
 
 	@PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Void> edit(@PathVariable("id") String id, @Valid @RequestBody Beer beer) throws Exception {
-		beerService.update(beer, id);
+	public ResponseEntity<Void> edit(@PathVariable("id") String id, @Valid @RequestBody BeerStyle beerStyle) throws Exception {
+		beerService.update(beerStyle, id);
 		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 	}
 }

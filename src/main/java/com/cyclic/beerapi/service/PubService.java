@@ -11,15 +11,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cyclic.beerapi.spotify.SpotifyService;
-import com.cyclic.beerapi.vo.Beer;
-import com.cyclic.beerapi.vo.BeerWithTempDifference;
+import com.cyclic.beerapi.vo.BeerStyle;
+import com.cyclic.beerapi.vo.BeerStyleWithTempDifference;
 import com.wrapper.spotify.model_objects.specification.Playlist;
 
 @Service
 public class PubService {
 
-	Comparator<BeerWithTempDifference> comparatorDifferenceTemperature = new Comparator<BeerWithTempDifference>() {
-	    public int compare(BeerWithTempDifference beer1, BeerWithTempDifference beer2) {
+	Comparator<BeerStyleWithTempDifference> comparatorDifferenceTemperature = new Comparator<BeerStyleWithTempDifference>() {
+	    public int compare(BeerStyleWithTempDifference beer1, BeerStyleWithTempDifference beer2) {
 	        int tempDifference = beer1.getDifferenceTemperature().compareTo(beer2.getDifferenceTemperature());
 
             if (tempDifference != 0) {
@@ -42,31 +42,31 @@ public class PubService {
 		this.spotifyService = spotifyService;
 	}
 	
-	public Beer beerWithMusic(Double temperature) {
-		Beer beer = suggestIdealBeer(temperature);
-		Playlist playlist = findPlaylistWith(beer);
+	public BeerStyle beerWithMusic(Double temperature) {
+		BeerStyle beerStyle = suggestIdealBeer(temperature);
+		Playlist playlist = findPlaylistWith(beerStyle);
 		
-		LOGGER.info("Beer Style: " + beer.getName() + "\nPlaylist: " + playlist.getName());
+		LOGGER.info("BeerStyle Style: " + beerStyle.getName() + "\nPlaylist: " + playlist.getName());
 		return null;
 	}
 
-	private Beer suggestIdealBeer(Double temperature){
-		List<Beer> beers = beerService.findByTemperature(temperature);
+	private BeerStyle suggestIdealBeer(Double temperature){
+		List<BeerStyle> beerStyles = beerService.findByTemperature(temperature);
 
-		beers = computeMinimumDifference(beers, temperature);
+		beerStyles = computeMinimumDifference(beerStyles, temperature);
 		
-		return beers.get(0);
+		return beerStyles.get(0);
 	}
 	
-	private List<Beer> computeMinimumDifference(List<Beer> beers, Double temperature) {
-		return beers.stream()
-		.map(b -> new BeerWithTempDifference(b, temperature))
+	private List<BeerStyle> computeMinimumDifference(List<BeerStyle> beerStyles, Double temperature) {
+		return beerStyles.stream()
+		.map(b -> new BeerStyleWithTempDifference(b, temperature))
 		.sorted(comparatorDifferenceTemperature)
 		.map(bW -> bW.getBeer())
 		.collect(Collectors.collectingAndThen(toList(), Collections::unmodifiableList));
 	}
 
-	private Playlist findPlaylistWith(Beer beer){
-		return spotifyService.getPlaylistByName(beer.getName());
+	private Playlist findPlaylistWith(BeerStyle beerStyle){
+		return spotifyService.getPlaylistByName(beerStyle.getName());
 	}	
 }

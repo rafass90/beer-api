@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cyclic.beerapi.repository.BeerRepositoryDAO;
-import com.cyclic.beerapi.vo.Beer;
+import com.cyclic.beerapi.vo.BeerStyle;
 
 @Service
 public class BeerService {
@@ -19,28 +19,28 @@ public class BeerService {
 		this.beerRepository = beerRepository;
 	}
 	
-	public String add(Beer beer) {
-		return this.beerRepository.insert(beer).getId();
+	public String add(BeerStyle beerStyle) {
+		return this.beerRepository.insert(beerStyle).getId();
 	}
 	
-	public List<Beer> listAll(){
+	public List<BeerStyle> listAll(){
 		return beerRepository.findAll();
 	}
 	
-	public Beer find(String id) {
-		Optional<Beer> beer = beerRepository.findById(id);
-		return beer.get();
+	public BeerStyle find(String id) {
+		Optional<BeerStyle> beerStyle = beerRepository.findById(id);
+		return beerStyle.get();
 	}
 
-	public List<Beer> findByTemperature(Double temperature) {
-		List<Beer> beers = beerRepository.findBeerByTemperature(temperature);
-		if(beers.isEmpty())
-			beers = beerRepository.findAll();
-		return beers;
+	public List<BeerStyle> findByTemperature(Double temperature) {
+		List<BeerStyle> beerStyles = beerRepository.findBeerByTemperature(temperature);
+		if(beerStyles.isEmpty())
+			beerStyles = beerRepository.findAll();
+		return beerStyles;
 	}
 	
-	public Beer update(Beer beer, String id) {
-		return beerRepository.save(beer);
+	public BeerStyle update(BeerStyle beerStyle, String id) {
+		return beerRepository.save(beerStyle);
 	}
 	
 	public void remove(String id) {

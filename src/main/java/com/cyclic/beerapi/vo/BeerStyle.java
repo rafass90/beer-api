@@ -2,7 +2,7 @@ package com.cyclic.beerapi.vo;
 
 import org.springframework.data.annotation.Id;
 
-public class Beer {
+public class BeerStyle {
 
 	@Id
 	private String id;
@@ -13,10 +13,10 @@ public class Beer {
 	
 	private Double maxTemperature;
 	
-	public Beer() {
+	public BeerStyle() {
 	}
 	
-	public Beer(String name, Double minTemperature, Double maxTemperature) {
+	public BeerStyle(String name, Double minTemperature, Double maxTemperature) {
 		this.name = name;
 		this.minTemperature = minTemperature;
 		this.maxTemperature = maxTemperature;
