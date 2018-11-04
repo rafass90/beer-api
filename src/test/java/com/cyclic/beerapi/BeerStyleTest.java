@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.cyclic.beerapi.vo.BeerStyle;
+import com.cyclic.beerapi.domain.vo.BeerStyle;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

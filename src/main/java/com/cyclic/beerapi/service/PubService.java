@@ -6,10 +6,10 @@ import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cyclic.beerapi.dto.DTO;
-import com.cyclic.beerapi.dto.PlaylistDTO;
-import com.cyclic.beerapi.vo.BeerStyle;
-import com.cyclic.beerapi.vo.BeerStyleWithTempDifference;
+import com.cyclic.beerapi.domain.dto.DTO;
+import com.cyclic.beerapi.domain.dto.PlaylistDTO;
+import com.cyclic.beerapi.domain.vo.BeerStyle;
+import com.cyclic.beerapi.domain.vo.BeerStyleWithTempDifference;
 
 @Service
 public class PubService {

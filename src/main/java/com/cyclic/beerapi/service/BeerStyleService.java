@@ -6,8 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cyclic.beerapi.domain.vo.BeerStyle;
 import com.cyclic.beerapi.repository.BeerRepositoryDAO;
-import com.cyclic.beerapi.vo.BeerStyle;
 
 @Service
 public class BeerStyleService {

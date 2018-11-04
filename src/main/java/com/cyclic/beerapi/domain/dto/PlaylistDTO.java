@@ -1,4 +1,4 @@
-package com.cyclic.beerapi.dto;
+package com.cyclic.beerapi.domain.dto;
 
 import java.util.List;
 

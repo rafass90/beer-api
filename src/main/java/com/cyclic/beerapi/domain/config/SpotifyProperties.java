@@ -1,4 +1,4 @@
-package com.cyclic.beerapi.spotify;
+package com.cyclic.beerapi.domain.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;

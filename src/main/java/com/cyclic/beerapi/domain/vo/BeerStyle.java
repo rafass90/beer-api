@@ -1,4 +1,4 @@
-package com.cyclic.beerapi.vo;
+package com.cyclic.beerapi.domain.vo;
 
 import org.springframework.data.annotation.Id;
 

@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cyclic.beerapi.domain.vo.BeerStyle;
 import com.cyclic.beerapi.service.BeerStyleService;
-import com.cyclic.beerapi.vo.BeerStyle;
 
 @RestController
 @RequestMapping(value = "/api/v1/admin/beer", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)

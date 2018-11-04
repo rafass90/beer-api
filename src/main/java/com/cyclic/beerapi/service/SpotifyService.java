@@ -8,10 +8,10 @@ import java.util.stream.Stream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cyclic.beerapi.dto.PlaylistDTO;
-import com.cyclic.beerapi.dto.TrackDTO;
-import com.cyclic.beerapi.spotify.SpotifyRepository;
-import com.cyclic.beerapi.vo.BeerStyle;
+import com.cyclic.beerapi.domain.dto.PlaylistDTO;
+import com.cyclic.beerapi.domain.dto.TrackDTO;
+import com.cyclic.beerapi.domain.vo.BeerStyle;
+import com.cyclic.beerapi.repository.spotify.SpotifyRepository;
 import com.wrapper.spotify.model_objects.specification.PlaylistSimplified;
 import com.wrapper.spotify.model_objects.specification.Track;
 

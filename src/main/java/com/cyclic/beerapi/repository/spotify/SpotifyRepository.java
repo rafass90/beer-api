@@ -1,4 +1,4 @@
-package com.cyclic.beerapi.spotify;
+package com.cyclic.beerapi.repository.spotify;
 
 import java.io.IOException;
 import java.net.URI;
@@ -9,6 +9,7 @@ import java.util.stream.Stream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cyclic.beerapi.domain.config.SpotifyProperties;
 import com.neovisionaries.i18n.CountryCode;
 import com.wrapper.spotify.SpotifyApi;
 import com.wrapper.spotify.exceptions.SpotifyWebApiException;

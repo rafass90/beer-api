@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
-import com.cyclic.beerapi.vo.BeerStyle;
+import com.cyclic.beerapi.domain.vo.BeerStyle;
 
 @Service
 public class BeerRepositoryDAO{
