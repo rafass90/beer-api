@@ -23,7 +23,7 @@ public class PubController {
 	
 	@GetMapping(value = "/temperature/{temperature}")
     public ResponseEntity<Object> findBeerByTemperature(@PathVariable(value = "temperature") Double temperature) throws Exception {
-		pubService.beerWithMusic(temperature);
-        return ResponseEntity.ok("Estamos pesquisando sua cerveja para a temperatura desejada: " + String.valueOf(temperature));
+        
+		return ResponseEntity.ok(pubService.beerWithMusic(temperature));
     }
 }

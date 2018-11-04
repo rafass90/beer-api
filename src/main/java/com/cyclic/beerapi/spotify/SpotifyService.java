@@ -2,7 +2,9 @@ package com.cyclic.beerapi.spotify;
 
 import java.io.IOException;
 import java.net.URI;
+import java.util.Arrays;
 import java.util.logging.Logger;
+import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,8 +14,9 @@ import com.wrapper.spotify.SpotifyApi;
 import com.wrapper.spotify.exceptions.SpotifyWebApiException;
 import com.wrapper.spotify.model_objects.credentials.ClientCredentials;
 import com.wrapper.spotify.model_objects.specification.Paging;
-import com.wrapper.spotify.model_objects.specification.Playlist;
 import com.wrapper.spotify.model_objects.specification.PlaylistSimplified;
+import com.wrapper.spotify.model_objects.specification.PlaylistTrack;
+import com.wrapper.spotify.model_objects.specification.Track;
 import com.wrapper.spotify.requests.authorization.client_credentials.ClientCredentialsRequest;
 
 @Service
@@ -41,23 +44,38 @@ public class SpotifyService {
 		this.spotifyApi = spotifyApi;
 	}
 
-	public Playlist getPlaylistByName(String name) {
-		Playlist playlist = null;
+	public PlaylistSimplified getPlaylistByName(String name) {
+		PlaylistSimplified playlistSimplified = null;
 		try {
-			Paging<PlaylistSimplified> playlistSimp = spotifyApi.searchPlaylists(name)
+			Paging<PlaylistSimplified> playlist = spotifyApi.searchPlaylists(name)
 					.market(CountryCode.BR)
 					.limit(1)
 					.build()
 					.execute();
 			
-			if(playlistSimp.getItems().length > 0)
-				playlist = spotifyApi.getPlaylist(playlistSimp.getItems()[0].getId())
-					.build()
-					.execute();
+			playlistSimplified = playlist.getItems()[0];
 
 		} catch (IOException | SpotifyWebApiException e) {
 			LOGGER.warning(e.getMessage());
 		}
-		return playlist;
+		return playlistSimplified;
+	}
+
+	public Stream<Track> getTracksByPlaylist(String playlistId) {
+		Stream<Track> tracks = null;
+		try {
+			Paging<PlaylistTrack> pTracks = spotifyApi.getPlaylistsTracks(playlistId)
+					.market(CountryCode.BR)
+					.build()
+					.execute();
+			
+			tracks = Arrays.asList(pTracks.getItems())
+					.parallelStream()
+					.map(PlaylistTrack::getTrack);
+		} catch (IOException | SpotifyWebApiException e) {
+			LOGGER.warning(e.getMessage());
+		}
+		
+		return tracks;
 	}
 }

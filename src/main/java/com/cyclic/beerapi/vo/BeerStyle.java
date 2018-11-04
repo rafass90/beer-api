@@ -26,16 +26,32 @@ public class BeerStyle {
 		return id;
 	}
 
+	public void setId(String id) {
+		this.id = id;
+	}
+
 	public String getName() {
 		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public Double getMinTemperature() {
 		return minTemperature;
 	}
 
+	public void setMinTemperature(Double minTemperature) {
+		this.minTemperature = minTemperature;
+	}
+
 	public Double getMaxTemperature() {
 		return maxTemperature;
+	}
+
+	public void setMaxTemperature(Double maxTemperature) {
+		this.maxTemperature = maxTemperature;
 	}
 
 	public Double getAverageTemperature() {
