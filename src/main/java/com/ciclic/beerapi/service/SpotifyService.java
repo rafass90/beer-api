@@ -1,0 +1,45 @@
+package com.ciclic.beerapi.service;
+
+import static java.util.stream.Collectors.toList;
+
+import java.util.List;
+import java.util.stream.Stream;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.ciclic.beerapi.domain.dto.PlaylistDTO;
+import com.ciclic.beerapi.domain.dto.TrackDTO;
+import com.ciclic.beerapi.domain.vo.BeerStyle;
+import com.ciclic.beerapi.repository.spotify.SpotifyRepository;
+import com.wrapper.spotify.model_objects.specification.PlaylistSimplified;
+import com.wrapper.spotify.model_objects.specification.Track;
+
+@Service
+public class SpotifyService {
+
+	private SpotifyRepository spotifyRepository;
+	
+	@Autowired
+	public SpotifyService(SpotifyRepository spotifyRepository) {
+		this.spotifyRepository = spotifyRepository;
+	}
+	
+	public PlaylistDTO findPlaylistWith(BeerStyle beerStyle){
+		PlaylistSimplified playlistByName = spotifyRepository.getPlaylistByName(beerStyle.getName());
+		Stream<Track> tracksByPlaylist = spotifyRepository.getTracksByPlaylist(playlistByName.getId());
+		
+		return new PlaylistDTO(playlistByName.getName(), convertToTrackDTOList(tracksByPlaylist));
+	}
+
+	private List<TrackDTO> convertToTrackDTOList(Stream<Track> tracksByPlaylist) {
+		return tracksByPlaylist
+			.map(t -> {
+				return new TrackDTO(
+				t.getArtists()[0].getName(),
+				t.getName(),
+				t.getHref());
+			})
+			.collect(toList());
+	}
+}
