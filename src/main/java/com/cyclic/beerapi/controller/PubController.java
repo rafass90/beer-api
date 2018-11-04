@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cyclic.beerapi.service.PubService;
 
 @RestController
-@RequestMapping(value = "/api/v1/beer", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(value = "/api/v1/beers", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class PubController {
 
 	private PubService pubService;

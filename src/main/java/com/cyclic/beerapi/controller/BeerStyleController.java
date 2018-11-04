@@ -21,7 +21,7 @@ import com.cyclic.beerapi.domain.vo.BeerStyle;
 import com.cyclic.beerapi.service.BeerStyleService;
 
 @RestController
-@RequestMapping(value = "/api/v1/admin/beer", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(value = "/api/v1/admin", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class BeerStyleController {
 
 	private BeerStyleService beerStyleService;
@@ -31,35 +31,35 @@ public class BeerStyleController {
 		this.beerStyleService = beerStyleService;
 	}
 
-	@GetMapping
+	@GetMapping(value = "/beers")
 	public ResponseEntity<List<BeerStyle>> listBeers() {
 		List<BeerStyle> beerStyles = beerStyleService.listAll();
 		
 		return new ResponseEntity<List<BeerStyle>>(beerStyles, HttpStatus.OK);
 	}
 
-	@PostMapping(headers = "Accept=application/json")
+	@PostMapping(headers = "Accept=application/json", value = "/beer")
 	public ResponseEntity<String> addBeer(@Valid @RequestBody BeerStyle beerStyle) {
 		String id = beerStyleService.add(beerStyle);
 		
 		return new ResponseEntity<String>(id, HttpStatus.CREATED);
 	}
 
-	@GetMapping(value = "/{id}")
+	@GetMapping(value = "/beer/{id}")
 	public ResponseEntity<BeerStyle> findBeer(@PathVariable("id") String id) {
 		beerStyleService.find(id);
 		
 		return new ResponseEntity<BeerStyle>(HttpStatus.NO_CONTENT);
 	}
 
-	@PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+	@PutMapping(value = "/beer/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Void> edit(@PathVariable("id") String id, @Valid @RequestBody BeerStyle beerStyle) throws Exception {
 		beerStyleService.update(beerStyle, id);
 		
 		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 	}
 	
-	@DeleteMapping(value = "/{id}")
+	@DeleteMapping(value = "/beer/{id}")
 	public ResponseEntity<Void> deleteBeer(@PathVariable("id") String id) {
 		beerStyleService.remove(id);
 		
