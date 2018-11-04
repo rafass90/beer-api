@@ -4,11 +4,11 @@ public class BeerStyleWithTempDifference implements Comparable<BeerStyleWithTemp
 
 	private BeerStyle beerStyle;
 	
-	private Double differenceTemperature;
+	private Double temperature;
 	
 	public BeerStyleWithTempDifference (BeerStyle beerStyle, Double temperature) {
 		this.beerStyle = beerStyle;
-		this.differenceTemperature = calculateDifferenceTemperature(beerStyle, temperature);
+		this.temperature = temperature;
 	}
 
 	public BeerStyle getBeer() {
@@ -16,11 +16,15 @@ public class BeerStyleWithTempDifference implements Comparable<BeerStyleWithTemp
 	}
 
 	public Double getDifferenceTemperature() {
-		return differenceTemperature;
+		return calculateDifferenceTemperature(beerStyle, temperature);
+	}
+	
+	public Double calculateAverageTemperature() {
+		return Double.sum(beerStyle.getMinTemperature(), beerStyle.getMaxTemperature()) / 2;
 	}
 
 	private double calculateDifferenceTemperature(BeerStyle beerStyle, Double temperature) {
-		return Math.abs(beerStyle.getAverageTemperature() - temperature);
+		return Math.abs(calculateAverageTemperature() - temperature);
 	}
 
 	@Override

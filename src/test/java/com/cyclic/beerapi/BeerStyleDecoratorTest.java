@@ -29,22 +29,70 @@ public class BeerStyleDecoratorTest {
 	}
 	
 	@Test
-	public void shouldCalculateDifferenceTemperature(){
-		BeerStyle beer1 = new BeerStyle("One", -3.0, 5.0);
-		BeerStyle beer2 = new BeerStyle("Two", -2.0, 14.0);
-		BeerStyle beer3 = new BeerStyle("Two", -0.0, 4.5);
+	public void shouldCalculateAverageTemperatureNoDecimal(){
+		BeerStyle beer = new BeerStyle("beer", -3.0, 5.0);
 		
-		Double desiredTemperature = 3.0;
-		
-		BeerStyleWithTempDifference beerWith1 = new BeerStyleWithTempDifference(beer1, desiredTemperature);
-		BeerStyleWithTempDifference beerWith2 = new BeerStyleWithTempDifference(beer2, desiredTemperature);
-		BeerStyleWithTempDifference beerWith3 = new BeerStyleWithTempDifference(beer3, desiredTemperature);
-		
-		assertThat(beerWith1.getDifferenceTemperature(), is(equalTo(2)));
-		assertThat(beerWith2.getDifferenceTemperature(), is(equalTo(3)));
-		assertThat(beerWith3.getDifferenceTemperature(), is(equalTo(0.65)));
+		BeerStyleWithTempDifference b = new BeerStyleWithTempDifference(beer, null);
+
+		assertThat(b.calculateAverageTemperature(), is(Double.parseDouble("1.0")));
 		
 	}
 	
+	@Test
+	public void shouldCalculateAverageTemperatureWithDecimal(){
+		BeerStyle beer = new BeerStyle("beer", 2.0, -4.5);
+		
+		BeerStyleWithTempDifference b = new BeerStyleWithTempDifference(beer, null);
+
+		assertThat(b.calculateAverageTemperature(), is(Double.parseDouble("-1.25")));
+		
+	}
+
+	@Test
+	public void shouldCalculateDifferenceTemperatureNoDecimal(){
+		BeerStyle beer = new BeerStyle("Beer", -3.0, 5.0);
+		
+		Double desiredTemperature = 3.0;
+		
+		BeerStyleWithTempDifference bW = new BeerStyleWithTempDifference(beer, desiredTemperature);
+		
+		assertThat(bW.getDifferenceTemperature(), is(equalTo(Double.parseDouble("2"))));
+		
+	}
+	
+	@Test
+	public void shouldCalculateDifferenceTemperatureOnlyNegativeNumber(){
+		BeerStyle beer = new BeerStyle("Two", -2.0, -1.0);
+		
+		Double desiredTemperature = -3.0;
+		
+		BeerStyleWithTempDifference bW = new BeerStyleWithTempDifference(beer, desiredTemperature);
+		
+		assertThat(bW.getDifferenceTemperature(), is(equalTo(Double.parseDouble("1.5"))));
+		
+	}
+	
+	@Test
+	public void shouldCalculateDifferenceTemperatureWithDecimal(){
+		BeerStyle beer = new BeerStyle("One", -3.5, 5.5);
+		
+		Double desiredTemperature = 3.0;
+		
+		BeerStyleWithTempDifference bW = new BeerStyleWithTempDifference(beer, desiredTemperature);
+		
+		assertThat(bW.getDifferenceTemperature(), is(equalTo(Double.parseDouble("2"))));
+		
+	}
+
+	
+	@Test(expected=NullPointerException.class)
+	public void shouldThrowNullPointerException(){
+		BeerStyle beer1 = new BeerStyle("b1", -2.0, null);
+		
+		BeerStyleWithTempDifference b1 = new BeerStyleWithTempDifference(beer1, null);
+		
+		assertThat(b1.calculateAverageTemperature(), is(Double.parseDouble("1.0")));
+		
+	}
 	
 }

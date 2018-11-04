@@ -27,25 +27,4 @@ public class BeerStyleTest {
 		assertThat(beer1.getMaxTemperature(), is(equalTo(maxTemperature)));
 	}
 	
-	@Test
-	public void shouldCalculateAverageTemperature(){
-		BeerStyle beer1 = new BeerStyle("b1", -3.0, 5.0);
-		BeerStyle beer2 = new BeerStyle("b2", -2.0, 14.0);
-		BeerStyle beer3 = new BeerStyle("b3", -0.0, 4.5);
-		
-		assertThat(beer1.getAverageTemperature(), is(Double.valueOf("1.0")));
-		assertThat(beer2.getAverageTemperature(), is(Double.valueOf("6.0")));
-		assertThat(beer3.getAverageTemperature(), is(Double.valueOf("2.25")));
-		
-	}
-	
-	@Test(expected=NullPointerException.class)
-	public void shouldThrowNullPointerException(){
-		BeerStyle beer1 = new BeerStyle("b1", -2.0, null);
-		
-		assertThat(beer1.getAverageTemperature(), is(Double.valueOf("1.0")));
-		
-	}
-	
-	
 }

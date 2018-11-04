@@ -1,16 +1,28 @@
 package com.cyclic.beerapi.domain.vo;
 
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 
 public class BeerStyle {
 
+	private static final String temperatureRange = "Temperature shoud be in range -99.99 at 99.99 and only 2 decimal digits";
 	@Id
 	private String id;
 	
+	@NotNull
+	@Size(min=3, message="BeerStyle name should have at least 3 characters")
 	private String name;
 	
+	@NotNull
+	@Digits(fraction=2, integer=2, message=temperatureRange)
 	private Double minTemperature;
 	
+	@NotNull
+	@Digits(fraction=2, integer=2, message=temperatureRange)
 	private Double maxTemperature;
 	
 	public BeerStyle() {
@@ -34,28 +46,12 @@ public class BeerStyle {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public Double getMinTemperature() {
 		return minTemperature;
 	}
 
-	public void setMinTemperature(Double minTemperature) {
-		this.minTemperature = minTemperature;
-	}
-
 	public Double getMaxTemperature() {
 		return maxTemperature;
-	}
-
-	public void setMaxTemperature(Double maxTemperature) {
-		this.maxTemperature = maxTemperature;
-	}
-
-	public Double getAverageTemperature() {
-		return Double.sum(minTemperature, maxTemperature) / 2;
 	}
 
 }

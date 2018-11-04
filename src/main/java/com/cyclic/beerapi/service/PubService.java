@@ -6,7 +6,7 @@ import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cyclic.beerapi.domain.dto.DTO;
+import com.cyclic.beerapi.domain.dto.BusinessDTO;
 import com.cyclic.beerapi.domain.dto.PlaylistDTO;
 import com.cyclic.beerapi.domain.vo.BeerStyle;
 import com.cyclic.beerapi.domain.vo.BeerStyleWithTempDifference;
@@ -26,13 +26,13 @@ public class PubService {
 		this.spotifyService = spotifyService;
 	}
 	
-	public DTO beerWithMusic(Double temperature) {
+	public BusinessDTO beerWithMusic(Double temperature) {
 		BeerStyle beerStyle = suggestIdealBeer(temperature);
 		PlaylistDTO playlist = spotifyService.findPlaylistWith(beerStyle);
 		
-		DTO dto = new DTO(beerStyle.getName(), playlist);
+		BusinessDTO businessDTO = new BusinessDTO(beerStyle.getName(), playlist);
 		LOGGER.info("BeerStyle Style: " + beerStyle.getName() + "\nPlaylist: " + playlist.getName());
-		return dto;
+		return businessDTO;
 	}
 
 	public BeerStyle suggestIdealBeer(Double temperature){

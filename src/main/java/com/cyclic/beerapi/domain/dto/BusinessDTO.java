@@ -1,13 +1,12 @@
 package com.cyclic.beerapi.domain.dto;
 
-public class DTO {
+public class BusinessDTO {
 
 	private String beerStyle;
 	
 	private PlaylistDTO playlist;
 	
-	public DTO(String beerStyle, PlaylistDTO playlist) {
-		super();
+	public BusinessDTO(String beerStyle, PlaylistDTO playlist) {
 		this.beerStyle = beerStyle;
 		this.playlist = playlist;
 	}

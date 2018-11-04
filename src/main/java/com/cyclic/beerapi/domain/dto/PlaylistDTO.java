@@ -9,7 +9,6 @@ public class PlaylistDTO {
 	private List<TrackDTO> tracks;
 
 	public PlaylistDTO(String name, List<TrackDTO> tracks) {
-		super();
 		this.name = name;
 		this.tracks = tracks;
 	}
