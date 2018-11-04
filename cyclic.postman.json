@@ -1,0 +1,201 @@
+{
+	"info": {
+		"_postman_id": "2a48d704-bf41-40c6-9963-50258cf1b2b4",
+		"name": "Teste Cyclic",
+		"description": "Requests para teste da Cyclic",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "test",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/actuator/health",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"actuator",
+						"health"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add beer",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"name\":\"IPA\",\n\t\"minTemperature\":\"-2.0\",\n\t\"maxTemperature\":\"2\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/beer",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"beer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "edit beer",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"id\": \"treze\",\n\"name\":\"DUNKEL\",\n\t\"minTemperature\":\"-8\",\n\t\"maxTemperature\":\"2\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/admin/beer/5bdf282ca35dc469b4673507",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"admin",
+						"beer",
+						"5bdf282ca35dc469b4673507"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete beer",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"id\": \"5bdde68d48024f2e7e4da4da\",\n\"name\":\"IPA\",\n\t\"minTemperature\":\"-2.0\",\n\t\"maxTemperature\":\"2\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/admin/beer/{5bde6ee891a7c11360a9a326}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"admin",
+						"beer",
+						"{5bde6ee891a7c11360a9a326}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "list Beers",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"name\":\"IPA\",\n\t\"minTemperature\":\"-2.0\",\n\t\"maxTemperature\":\"2\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/admin/beers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"admin",
+						"beers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Pub ideal",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"name\":\"IPA\",\n\t\"minTemperature\":\"-2.0\",\n\t\"maxTemperature\":\"2\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/beers/temperature/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"beers",
+						"temperature",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
