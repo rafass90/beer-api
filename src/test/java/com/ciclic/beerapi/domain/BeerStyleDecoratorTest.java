@@ -126,9 +126,7 @@ public class BeerStyleDecoratorTest {
 		
 		final List<BeerStyleWithTempDifference> orderedList = Arrays.asList(b3, b1, b2)
 		.stream()
-		.peek(b -> System.out.println(b.getBeer().getName()))
 		.sorted()
-		.peek(b -> System.out.println(b.getBeer().getName()))
 		.collect(toList());
 		
 		assertThat(orderedList.get(0), is(b1));

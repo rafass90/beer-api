@@ -1,5 +1,7 @@
 package com.ciclic.beerapi.domain.vo;
 
+import java.io.Serializable;
+
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -7,7 +9,9 @@ import javax.validation.constraints.Size;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 
-public class BeerStyle {
+public class BeerStyle implements Serializable{
+	
+	private static final long serialVersionUID = 5988670519562861011L;
 
 	private static final String temperatureRange = "Temperature shoud be in range -99.99 at 99.99 and only 2 decimal digits";
 	
@@ -15,7 +19,7 @@ public class BeerStyle {
 	private String id;
 	
 	@NotNull
-	@Indexed(unique = true, dropDups=true)
+	@Indexed(unique = true)
 	@Size(min=3, message="BeerStyle name should have at least 3 characters")
 	private String name;
 	

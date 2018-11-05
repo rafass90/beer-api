@@ -27,18 +27,15 @@ public class SpotifyService {
 		this.spotifyRepository = spotifyRepository;
 	}
 	
-	public PlaylistDTO findPlaylistWith(BeerStyle beerStyle){
+	public PlaylistDTO findPlaylistWith(BeerStyle beerStyle) throws SpotifyWebApiException, IOException{
 		PlaylistSimplified playlistByName;
 		Stream<Track> tracksByPlaylist;
 
-		try {
-			playlistByName = spotifyRepository.getPlaylistByName(beerStyle.getName());
-			tracksByPlaylist = spotifyRepository.getTracksByPlaylist(playlistByName.getId());
-		} catch (SpotifyWebApiException | IOException e) {
-			e.printStackTrace();
+		playlistByName = spotifyRepository.getPlaylistByName(beerStyle.getName());
+		if(playlistByName == null) {
 			return null;
 		}
-		
+		tracksByPlaylist = spotifyRepository.getTracksByPlaylist(playlistByName.getId());
 		return new PlaylistDTO(playlistByName.getName(), convertToTrackDTOList(tracksByPlaylist));
 	}
 

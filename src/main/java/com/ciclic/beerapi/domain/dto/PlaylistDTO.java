@@ -1,8 +1,11 @@
 package com.ciclic.beerapi.domain.dto;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class PlaylistDTO {
+public class PlaylistDTO implements Serializable{
+
+	private static final long serialVersionUID = 387567319113641373L;
 
 	private String name;
 	

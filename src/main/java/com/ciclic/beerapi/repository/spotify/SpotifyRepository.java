@@ -33,8 +33,9 @@ public class SpotifyRepository{
 				.build()
 				.execute();
 		
-		playlistSimplified = playlist.getItems()[0];
-
+		if(playlist.getTotal() > 0) {
+			playlistSimplified = playlist.getItems()[0];
+		}
 		return playlistSimplified;
 	}
 

@@ -1,5 +1,6 @@
 package com.ciclic.beerapi.service;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,8 @@ import com.ciclic.beerapi.domain.dto.BusinessDTO;
 import com.ciclic.beerapi.domain.dto.PlaylistDTO;
 import com.ciclic.beerapi.domain.vo.BeerStyle;
 import com.ciclic.beerapi.domain.vo.BeerStyleWithTempDifference;
+import com.ciclic.beerapi.repository.ResourceNotFoundException;
+import com.wrapper.spotify.exceptions.SpotifyWebApiException;
 
 @Service
 public class PubService {
@@ -23,10 +26,10 @@ public class PubService {
 		this.spotifyService = spotifyService;
 	}
 
-	public BusinessDTO beerWithMusic(Double temperature) {
+	public BusinessDTO beerWithMusic(Double temperature) throws ResourceNotFoundException, SpotifyWebApiException, IOException {
 		BeerStyle beerStyle = suggestIdealBeer(temperature);
 		if(beerStyle == null) {
-			return null;
+			throw new ResourceNotFoundException();
 		}
 		PlaylistDTO playlist = spotifyService.findPlaylistWith(beerStyle);
 
