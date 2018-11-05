@@ -2,7 +2,6 @@ package com.ciclic.beerapi.integration;
 
 import java.io.IOException;
 
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.impl.client.HttpClientBuilder;
@@ -15,6 +14,8 @@ import com.ciclic.beerapi.BeerApiApplication;
 import com.ciclic.beerapi.domain.vo.BeerStyle;
 import com.ciclic.beerapi.repository.BeerStyleRepository;
 
+import reactor.core.publisher.Mono;
+
 @SpringBootTest(classes = BeerApiApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestPropertySource("classpath:application-dev.properties")
 public class ControllerTest {
@@ -25,8 +26,13 @@ public class ControllerTest {
     @Autowired
 	private BeerStyleRepository beerStyleRepository;
    
-	protected CloseableHttpResponse executeRequest(HttpRequestBase request) throws IOException, ClientProtocolException {
-		return HttpClientBuilder.create().build().execute(request);
+	protected CloseableHttpResponse executeRequest(HttpRequestBase request){
+		try {
+			return HttpClientBuilder.create().build().execute(request);
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 	
 	protected void deleteTestById(String id) {
@@ -37,7 +43,7 @@ public class ControllerTest {
 		beerStyleRepository.deleteAll();
 	}
 	
-	protected BeerStyle insertTest(String name) {
+	protected Mono<BeerStyle> insertTest(String name) {
 		return beerStyleRepository.insert(new BeerStyle(name, -1.0, 1.0));
 	}
 }

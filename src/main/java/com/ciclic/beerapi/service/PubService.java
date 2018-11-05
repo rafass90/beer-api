@@ -13,6 +13,8 @@ import com.ciclic.beerapi.domain.vo.BeerStyle;
 import com.ciclic.beerapi.domain.vo.BeerStyleWithTempDifference;
 import com.wrapper.spotify.exceptions.SpotifyWebApiException;
 
+import reactor.core.publisher.Mono;
+
 @Service
 public class PubService {
 
@@ -38,15 +40,16 @@ public class PubService {
 	}
 
 	public BeerStyle suggestIdealBeer(Double temperature) {
-		List<BeerStyle> beerStyles = beerStyleService.listAll();
-
+		Mono<List<BeerStyle>> beerStyles = beerStyleService.listAll();
+		
 		BeerStyle beerStyle = findFirstBeerStyle(beerStyles, temperature);
 
 		return beerStyle;
 	}
 
-	private BeerStyle findFirstBeerStyle(List<BeerStyle> beerStyles, Double temperature) {
+	private BeerStyle findFirstBeerStyle(Mono<List<BeerStyle>> beerStyles, Double temperature) {
 		return beerStyles
+				.block()
 				.stream()
 				.map(b -> new BeerStyleWithTempDifference(b, temperature))
 				.sorted()
@@ -54,5 +57,4 @@ public class PubService {
 				.findFirst()
 				.orElse(null);
 	}
-
 }

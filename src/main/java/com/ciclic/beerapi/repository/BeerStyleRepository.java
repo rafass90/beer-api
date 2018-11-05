@@ -1,10 +1,12 @@
 package com.ciclic.beerapi.repository;
 
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 
 import com.ciclic.beerapi.domain.vo.BeerStyle;
 
-public interface BeerStyleRepository extends MongoRepository<BeerStyle, String>{
+import reactor.core.publisher.Mono;
+
+public interface BeerStyleRepository extends ReactiveMongoRepository<BeerStyle, String>{
 	
-	public boolean existsByName(String name);
+	public Mono<Boolean> existsByName(String name);
 }

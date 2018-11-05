@@ -8,6 +8,7 @@ import java.io.IOException;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
+import org.apache.http.ParseException;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
@@ -21,6 +22,8 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.ciclic.beerapi.domain.vo.BeerStyle;
+
+import reactor.core.publisher.Mono;
 
 @RunWith(SpringRunner.class)
 
@@ -47,19 +50,26 @@ public class BeerStyleControllerTest extends ControllerTest{
 	@Test
 	public void givenBeerStyleAlreadExistingToAdd_thenStatusCreatedIsConflict() throws ClientProtocolException, IOException {
 		// Given
-		BeerStyle bStyle = insertTest("TestBeerStyle");
-		
-		// When
-		HttpPost request = new HttpPost("http://localhost:"+port+"/api/v1/admin/beers");
-		request.setEntity(createPostBody("TestBeerStyle", -1.0, 10.00));
-		HttpResponse httpResponse = executeRequest(request);
-		HttpEntity ent = httpResponse.getEntity();
-
-		// Then
-		String idCreated = EntityUtils.toString(ent, "UTF-8");
-		assertThat(httpResponse.getStatusLine().getStatusCode(), is(HttpStatus.SC_CONFLICT));
-		deleteTestById(idCreated);
-		deleteTestById(bStyle.getId());
+		Mono<BeerStyle> bStyle = insertTest("TestBeerStyle");
+		bStyle.doOnSuccess(b -> {
+			
+			// When
+			HttpPost request = new HttpPost("http://localhost:"+port+"/api/v1/admin/beers");
+			request.setEntity(createPostBody("TestBeerStyle", -1.0, 10.00));
+			HttpResponse httpResponse = executeRequest(request);
+			HttpEntity ent = httpResponse.getEntity();
+	
+			// Then
+			String idCreated = null;
+			try {
+				idCreated = EntityUtils.toString(ent, "UTF-8");
+			} catch (ParseException | IOException e) {
+				e.printStackTrace();
+			}
+			assertThat(httpResponse.getStatusLine().getStatusCode(), is(HttpStatus.SC_CONFLICT));
+			deleteTestById(idCreated);
+			deleteTestById(b.getId());
+		});
 	}
 
 	@Test
@@ -78,22 +88,25 @@ public class BeerStyleControllerTest extends ControllerTest{
 	@Test
 	public void givenBeerStyleExisting_thenStatusReceivedIsOK() throws ClientProtocolException, IOException {
 		// Given
-		BeerStyle bStyle = insertTest("test");
-		HttpGet request = new HttpGet("http://localhost:"+port+"/api/v1/admin/beers/" + bStyle.getId());
-
-		// When
-		HttpResponse httpResponse = executeRequest(request);
-
-		// Then
-		assertThat(httpResponse.getStatusLine().getStatusCode(), is(HttpStatus.SC_OK));
-		deleteTestById(bStyle.getId());
+		Mono<BeerStyle> bStyle = insertTest("test");
+		bStyle.doOnSuccess(b -> {
+			HttpGet request = new HttpGet("http://localhost:"+port+"/api/v1/admin/beers/" + b.getId());
+	
+			// When
+			HttpResponse httpResponse = executeRequest(request);
+	
+			// Then
+			assertThat(httpResponse.getStatusLine().getStatusCode(), is(HttpStatus.SC_OK));
+			deleteTestById(b.getId());
+		});
 	}
 
 	@Test
 	public void givenBeerStyleToEdit_thenStatusReceivedIsNoContent() throws ClientProtocolException, IOException {
 		// Given
-		BeerStyle bStyle = insertTest("test");
-		HttpPut request = new HttpPut("http://localhost:"+port+"/api/v1/admin/beers/" + bStyle.getId());
+		Mono<BeerStyle> bStyle = insertTest("test");
+		bStyle.doOnSuccess(b -> {
+		HttpPut request = new HttpPut("http://localhost:"+port+"/api/v1/admin/beers/" + b.getId());
 		request.setEntity(createPostBody("Edited", -1.0, 10.1));
 
 		// When
@@ -101,7 +114,8 @@ public class BeerStyleControllerTest extends ControllerTest{
 
 		// Then
 		assertThat(httpResponse.getStatusLine().getStatusCode(), is(HttpStatus.SC_NO_CONTENT));
-		deleteTestById(bStyle.getId());
+		deleteTestById(b.getId());
+		});
 	}
 	
 	@Test
@@ -120,14 +134,16 @@ public class BeerStyleControllerTest extends ControllerTest{
 	@Test
 	public void givenBeerStyleExisting_whenDelete_thenStatusReceivedIsNoContent() throws ClientProtocolException, IOException {
 		// Given
-		BeerStyle bStyle = insertTest("test");
-		HttpDelete request = new HttpDelete("http://localhost:"+port+"/api/v1/admin/beers/" + bStyle.getId());
-
-		// When
-		HttpResponse httpResponse = executeRequest(request);
-
-		// Then
-		assertThat(httpResponse.getStatusLine().getStatusCode(), is(HttpStatus.SC_NO_CONTENT));
+		Mono<BeerStyle> bStyle = insertTest("test");
+		bStyle.doOnSuccess(b -> {
+			HttpDelete request = new HttpDelete("http://localhost:"+port+"/api/v1/admin/beers/" + b.getId());
+	
+			// When
+			HttpResponse httpResponse = executeRequest(request);
+	
+			// Then
+			assertThat(httpResponse.getStatusLine().getStatusCode(), is(HttpStatus.SC_NO_CONTENT));
+		});
 	}
 
 	@Test

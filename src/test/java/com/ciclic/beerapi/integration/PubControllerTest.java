@@ -19,6 +19,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.ciclic.beerapi.BeerApiApplication;
 import com.ciclic.beerapi.domain.vo.BeerStyle;
 
+import reactor.core.publisher.Mono;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = BeerApiApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestPropertySource("classpath:application-dev.properties")
@@ -29,7 +31,8 @@ public class PubControllerTest extends ControllerTest{
 	public void givenTemperatureWithPlaylist_thenStatusReceivedIsOK() throws ClientProtocolException, IOException {
 		// Given
 		deleteAllBeerStyles();
-		BeerStyle bStyle = insertTest("Rock");
+		Mono<BeerStyle> bStyle = insertTest("Rock");
+		bStyle.doOnSuccess(b -> {
 		HttpGet request = new HttpGet("http://localhost:" + port + "/api/v1/beers/temperature/1");
 
 		// When
@@ -37,21 +40,24 @@ public class PubControllerTest extends ControllerTest{
 
 		// Then
 		assertThat(httpResponse.getStatusLine().getStatusCode(), is(HttpStatus.SC_OK));
-		deleteTestById(bStyle.getId());
+		deleteTestById(b.getId());
+		});
 	}
 	
 	@Test
 	public void givenTemperature_thenStatusReceivedIsOK() throws ClientProtocolException, IOException {
 		// Given
-		BeerStyle bStyle = insertTest("test");
-		HttpGet request = new HttpGet("http://localhost:" + port + "/api/v1/beers/temperature/1");
+		Mono<BeerStyle> bStyle = insertTest("test");
+		bStyle.doOnSuccess(b -> {
+			HttpGet request = new HttpGet("http://localhost:" + port + "/api/v1/beers/temperature/1");
 
-		// When
-		HttpResponse httpResponse = executeRequest(request);
+			// When
+			HttpResponse httpResponse = executeRequest(request);
 
-		// Then
-		assertThat(httpResponse.getStatusLine().getStatusCode(), is(HttpStatus.SC_OK));
-		deleteTestById(bStyle.getId());
+			// Then
+			assertThat(httpResponse.getStatusLine().getStatusCode(), is(HttpStatus.SC_OK));
+			deleteTestById(b.getId());
+		});
 	}
 	
 	@Test
@@ -70,16 +76,18 @@ public class PubControllerTest extends ControllerTest{
 	@Test
 	public void givenTemperatureWithNoPlaylist_thenStatusReceivedIsOK() throws ClientProtocolException, IOException {
 		deleteAllBeerStyles();
-		BeerStyle bStyle = insertTest("tempnoplaystname111");
-		// Given
-		HttpGet request = new HttpGet("http://localhost:" + port + "/api/v1/beers/temperature/1");
-
-		// When
-		HttpResponse httpResponse = executeRequest(request);
-
-		// Then
-		assertThat(httpResponse.getStatusLine().getStatusCode(), is(HttpStatus.SC_OK));
-		deleteTestById(bStyle.getId());
+		Mono<BeerStyle> bStyle = insertTest("tempnoplaystname111");
+		bStyle.doOnSuccess(b -> {
+			// Given
+			HttpGet request = new HttpGet("http://localhost:" + port + "/api/v1/beers/temperature/1");
+	
+			// When
+			HttpResponse httpResponse = executeRequest(request);
+	
+			// Then
+			assertThat(httpResponse.getStatusLine().getStatusCode(), is(HttpStatus.SC_OK));
+			deleteTestById(b.getId());
+		});
 	}
 
 }

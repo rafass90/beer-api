@@ -1,7 +1,5 @@
 package com.ciclic.beerapi.controller;
 
-import java.util.List;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,12 +31,12 @@ public class BeerStyleController {
 		this.beerStyleService = beerStyleService;
 	}
 
-	@GetMapping
-	public ResponseEntity<List<BeerStyle>> listBeers() {
-		List<BeerStyle> beerStyles = beerStyleService.listAll();
-		
-		return new ResponseEntity<List<BeerStyle>>(beerStyles, HttpStatus.OK);
-	}
+//	@GetMapping
+//	public ResponseEntity<List<BeerStyle>> listBeers() {
+//		List<BeerStyle> beerStyles = beerStyleService.listAll()
+//		
+//		return new ResponseEntity<List<BeerStyle>>(beerStyles, HttpStatus.OK);
+//	}
 
 	@PostMapping(headers = "Accept=application/json")
 	public ResponseEntity<String> addBeer(@Valid @RequestBody BeerStyle beerStyle) throws ResourceDuplicatedException {
