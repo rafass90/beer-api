@@ -1,7 +1,6 @@
 package com.ciclic.beerapi.controller;
 
 import java.util.List;
-import java.util.logging.Logger;
 
 import javax.validation.Valid;
 
@@ -25,8 +24,6 @@ import com.ciclic.beerapi.service.BeerStyleService;
 @RequestMapping(value = "/api/v1/admin/beers", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class BeerStyleController {
 
-	private final static Logger LOGGER = Logger.getLogger(BeerStyleController.class.getName());
-	
 	private BeerStyleService beerStyleService;
 	
 	@Autowired
@@ -50,9 +47,9 @@ public class BeerStyleController {
 
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<BeerStyle> findBeer(@PathVariable("id") String id) {
-		beerStyleService.find(id);
+		BeerStyle beerStyle = beerStyleService.find(id);
 		
-		return new ResponseEntity<BeerStyle>(HttpStatus.OK);
+		return new ResponseEntity<BeerStyle>(beerStyle, HttpStatus.OK);
 	}
 
 	@PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)

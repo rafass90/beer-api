@@ -1,7 +1,6 @@
 package com.ciclic.beerapi.service;
 
 import java.util.List;
-import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,8 +12,6 @@ import com.ciclic.beerapi.domain.vo.BeerStyleWithTempDifference;
 
 @Service
 public class PubService {
-
-	private final static Logger LOGGER = Logger.getLogger(PubService.class.getName());
 
 	private BeerStyleService beerStyleService;
 
@@ -34,7 +31,6 @@ public class PubService {
 		PlaylistDTO playlist = spotifyService.findPlaylistWith(beerStyle);
 
 		BusinessDTO businessDTO = new BusinessDTO(beerStyle.getName(), playlist);
-		LOGGER.info("BeerStyle Style: " + beerStyle.getName() + "\nPlaylist: " + playlist.getName());
 		return businessDTO;
 	}
 

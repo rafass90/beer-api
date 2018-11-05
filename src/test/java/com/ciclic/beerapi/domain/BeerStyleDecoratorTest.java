@@ -106,7 +106,7 @@ public class BeerStyleDecoratorTest {
 		BeerStyleWithTempDifference b2 = new BeerStyleWithTempDifference(new BeerStyle("b2", -2.0, 2.5), temp);
 		BeerStyleWithTempDifference b3 = new BeerStyleWithTempDifference(new BeerStyle("b3", -2.0, 4.0), temp);
 		
-		final List orderedList = Arrays.asList(b1, b2, b3)
+		final List orderedList = Arrays.asList(b3, b2, b1)
 		.stream()
 		.sorted()
 		.collect(toList());
@@ -124,7 +124,7 @@ public class BeerStyleDecoratorTest {
 		BeerStyleWithTempDifference b2 = new BeerStyleWithTempDifference(new BeerStyle("aab", -2.0, -1.0), temp);
 		BeerStyleWithTempDifference b3 = new BeerStyleWithTempDifference(new BeerStyle("yyy", -2.0, -1.0), temp);
 		
-		final List<BeerStyleWithTempDifference> orderedList = Arrays.asList(b1, b2, b3)
+		final List<BeerStyleWithTempDifference> orderedList = Arrays.asList(b3, b1, b2)
 		.stream()
 		.peek(b -> System.out.println(b.getBeer().getName()))
 		.sorted()
