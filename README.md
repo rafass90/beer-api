@@ -26,15 +26,32 @@ Há um arquivo na raiz do projeto(cyclic.postman.json) que pode ser importado no
 Para executar os testes unitários, executar o comando ``` ./gradle test``` na raiz do projeto, ou via IDE.
 Através da URL `https://ciclic-beer-api.herokuapp.com/swagger-ui.html`, pode ser acessada a documentação dos endpoints gerada pelo Swagger.
 
-Para executar o projeto localmente executar o comando abaixo no diretrio raiz do projeto
+Para executar o projeto localmente, inserir via linha de comando no diretrio raiz do projeto
   Requisitos: JDK8, Gradle
+  
   Comando: ``` ./gradle build``` para compilar a aplicação.
+  
   Comando: ``` ./gradle bootRun``` para iniciar o tomcat.
 
 Para executar o projeto sem necessidade de instalar JDK, Gradle/maven:
+
   Requisitos: docker instalado
+
   Comando: ``` docker run -p 5000:8080 rafass90/spring-boot-beer-api:0.0.2```
+
 Após download da imagem e start da aplicaço, a mesma ficará disponível no endereço `http://127.0.0.1:5000`.
+
+Para esta aplicação, não foi adicionada nenhuma restrição de segurança/CORS para facilitar os testes
+
+**IMPORTANTE**
+
+As branches develop e master estão utilizando base de dados diferentes. Ambas hospedadas no mLab.
+
+**Para deploy da aplicaço(no Heroku), basta publicar alteração na branch _MASTER_**
+
+- Commit no README.md :innocent:
+
+- Merge develop -> master :innocent:
 
 
 
