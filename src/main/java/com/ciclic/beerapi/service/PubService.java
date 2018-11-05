@@ -1,9 +1,6 @@
 package com.ciclic.beerapi.service;
 
-import static org.junit.Assert.assertNotNull;
-
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +39,7 @@ public class PubService {
 	}
 
 	public BeerStyle suggestIdealBeer(Double temperature) {
-		List<BeerStyle> beerStyles = beerStyleService.findByTemperature(temperature);
+		List<BeerStyle> beerStyles = beerStyleService.listAll();
 
 		BeerStyle beerStyle = findFirstBeerStyle(beerStyles, temperature);
 

@@ -17,16 +17,8 @@ public class PlaylistDTO {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public List<TrackDTO> getTracks() {
 		return tracks;
 	}
 
-	public void setTracks(List<TrackDTO> tracks) {
-		this.tracks = tracks;
-	}
-	
 }

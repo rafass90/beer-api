@@ -32,13 +32,6 @@ public class BeerStyleService {
 		return beerStyle.get();
 	}
 
-	public List<BeerStyle> findByTemperature(Double temperature) {
-		List<BeerStyle> beerStyles = beerRepository.findAll();
-		if(beerStyles.isEmpty())
-			beerStyles = beerRepository.findAll();
-		return beerStyles;
-	}
-	
 	public BeerStyle update(BeerStyle beerStyle, String id) {
 		beerStyle.setId(id);
 		return beerRepository.save(beerStyle);
