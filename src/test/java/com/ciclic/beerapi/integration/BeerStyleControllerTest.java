@@ -9,6 +9,7 @@ import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
@@ -59,20 +60,6 @@ public class BeerStyleControllerTest{
 		
 		beerStyleRepository.deleteById(idCreated);
 	}
-	
-	@Test
-	public void givenBeerStyleExisting_thenStatusReceivedIsOK() throws ClientProtocolException, IOException {
-		BeerStyle bStyle = beerStyleRepository.insert(new BeerStyle("test", -1.0, 1.0));
-		
-		// Given
-		HttpGet request = new HttpGet("http://localhost:"+port+"/api/v1/admin/beers/" + bStyle.getId());
-
-		// When
-		HttpResponse httpResponse = HttpClientBuilder.create().build().execute(request);
-
-		// Then
-		assertThat(httpResponse.getStatusLine().getStatusCode(), is(HttpStatus.SC_NO_CONTENT));
-	}
 
 	@Test
 	public void givenBeerStyleToAddWithWrongParameters_thenStatusReceivedIsBadRequest() throws ClientProtocolException, IOException {
@@ -89,6 +76,22 @@ public class BeerStyleControllerTest{
 
 		// Then
 		assertThat(httpResponse.getStatusLine().getStatusCode(), is(HttpStatus.SC_BAD_REQUEST));
+	}
+
+	@Test
+	public void givenBeerStyleExisting_thenStatusReceivedIsOK() throws ClientProtocolException, IOException {
+		BeerStyle bStyle = beerStyleRepository.insert(new BeerStyle("test", -1.0, 1.0));
+		
+		// Given
+		HttpGet request = new HttpGet("http://localhost:"+port+"/api/v1/admin/beers/" + bStyle.getId());
+
+		// When
+		HttpResponse httpResponse = HttpClientBuilder.create().build().execute(request);
+
+		// Then
+		assertThat(httpResponse.getStatusLine().getStatusCode(), is(HttpStatus.SC_OK));
+		
+		beerStyleRepository.deleteById(bStyle.getId());
 	}
 
 	@Test
@@ -116,7 +119,7 @@ public class BeerStyleControllerTest{
 		BeerStyle bStyle = beerStyleRepository.insert(new BeerStyle("test", -1.0, 1.0));
 		
 		// Given
-		HttpGet request = new HttpGet("http://localhost:"+port+"/api/v1/admin/beers/" + bStyle.getId());
+		HttpDelete request = new HttpDelete("http://localhost:"+port+"/api/v1/admin/beers/" + bStyle.getId());
 
 		// When
 		HttpResponse httpResponse = HttpClientBuilder.create().build().execute(request);
@@ -124,7 +127,19 @@ public class BeerStyleControllerTest{
 		// Then
 		assertThat(httpResponse.getStatusLine().getStatusCode(), is(HttpStatus.SC_NO_CONTENT));
 		
-		beerStyleRepository.deleteById(bStyle.getId());
+	}
+
+	@Test
+	public void givenBeerStyleNoExisting_whenTryDelete_thenStatusReceivedIsNoContent() throws ClientProtocolException, IOException {
+		// Given
+		HttpDelete request = new HttpDelete("http://localhost:"+port+"/api/v1/admin/beers/" + "111555111");
+
+		// When
+		HttpResponse httpResponse = HttpClientBuilder.create().build().execute(request);
+
+		// Then
+		assertThat(httpResponse.getStatusLine().getStatusCode(), is(HttpStatus.SC_NO_CONTENT));
+		
 	}
 
 }

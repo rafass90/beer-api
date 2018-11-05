@@ -2,7 +2,6 @@ package com.ciclic.beerapi.repository.spotify;
 
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.logging.Logger;
 import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +17,6 @@ import com.wrapper.spotify.model_objects.specification.Track;
 
 @Service
 public class SpotifyRepository{
-	private final static Logger LOGGER = Logger.getLogger(SpotifyRepository.class.getName());
 
 	private SpotifyApi spotifyApi;
 
@@ -27,38 +25,29 @@ public class SpotifyRepository{
 		this.spotifyApi = spotifyApi;
 	}
 
-
-	public PlaylistSimplified getPlaylistByName(String name) {
+	public PlaylistSimplified getPlaylistByName(String name) throws SpotifyWebApiException, IOException {
 		PlaylistSimplified playlistSimplified = null;
-		try {
-			Paging<PlaylistSimplified> playlist = spotifyApi.searchPlaylists(name)
-					.market(CountryCode.BR)
-					.limit(1)
-					.build()
-					.execute();
-			
-			playlistSimplified = playlist.getItems()[0];
+		Paging<PlaylistSimplified> playlist = spotifyApi.searchPlaylists(name)
+				.market(CountryCode.BR)
+				.limit(1)
+				.build()
+				.execute();
+		
+		playlistSimplified = playlist.getItems()[0];
 
-		} catch (IOException | SpotifyWebApiException e) {
-			LOGGER.warning(e.getMessage());
-		}
 		return playlistSimplified;
 	}
 
-	public Stream<Track> getTracksByPlaylist(String playlistId) {
+	public Stream<Track> getTracksByPlaylist(String playlistId) throws SpotifyWebApiException, IOException {
 		Stream<Track> tracks = null;
-		try {
-			Paging<PlaylistTrack> pTracks = spotifyApi.getPlaylistsTracks(playlistId)
-					.market(CountryCode.BR)
-					.build()
-					.execute();
-			
-			tracks = Arrays.asList(pTracks.getItems())
-					.parallelStream()
-					.map(PlaylistTrack::getTrack);
-		} catch (IOException | SpotifyWebApiException e) {
-			LOGGER.warning(e.getMessage());
-		}
+		Paging<PlaylistTrack> pTracks = spotifyApi.getPlaylistsTracks(playlistId)
+				.market(CountryCode.BR)
+				.build()
+				.execute();
+		
+		tracks = Arrays.asList(pTracks.getItems())
+				.parallelStream()
+				.map(PlaylistTrack::getTrack);
 		
 		return tracks;
 	}
