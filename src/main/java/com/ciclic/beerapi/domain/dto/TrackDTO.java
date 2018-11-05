@@ -1,6 +1,10 @@
 package com.ciclic.beerapi.domain.dto;
 
-public class TrackDTO {
+import java.io.Serializable;
+
+public class TrackDTO implements Serializable{
+
+	private static final long serialVersionUID = -6057483727214858603L;
 
 	private String name;
 	

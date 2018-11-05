@@ -1,6 +1,10 @@
 package com.ciclic.beerapi.domain.dto;
 
-public class BusinessDTO {
+import java.io.Serializable;
+
+public class BusinessDTO implements Serializable{
+
+	private static final long serialVersionUID = 6696723584906705378L;
 
 	private String beerStyle;
 	

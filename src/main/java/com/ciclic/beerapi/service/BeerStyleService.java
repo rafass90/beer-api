@@ -8,37 +8,50 @@ import org.springframework.stereotype.Service;
 
 import com.ciclic.beerapi.domain.vo.BeerStyle;
 import com.ciclic.beerapi.repository.BeerStyleRepository;
+import com.ciclic.beerapi.repository.ResourceDuplicatedException;
+import com.ciclic.beerapi.repository.ResourceNotFoundException;
 
 @Service
 public class BeerStyleService {
 
 	private BeerStyleRepository beerRepository;
-	
+
 	@Autowired
 	public BeerStyleService(BeerStyleRepository beerRepository) {
 		this.beerRepository = beerRepository;
 	}
-	
-	public String add(BeerStyle beerStyle) {
+
+	public String add(BeerStyle beerStyle) throws ResourceDuplicatedException {
+		if(beerRepository.existsByName(beerStyle.getName())){
+			throw new ResourceDuplicatedException("BeerStyle already exists");
+		}
 		return this.beerRepository.insert(beerStyle).getId();
 	}
-	
-	public List<BeerStyle> listAll(){
+
+	public List<BeerStyle> listAll() {
 		return beerRepository.findAll();
 	}
-	
-	public BeerStyle find(String id) {
+
+	public BeerStyle find(String id) throws ResourceNotFoundException {
 		Optional<BeerStyle> beerStyle = beerRepository.findById(id);
-		return beerStyle.get();
+
+		return beerStyle.orElseThrow(() -> new ResourceNotFoundException("BeerStyle not found"));
 	}
 
-	public BeerStyle update(BeerStyle beerStyle, String id) {
+	public BeerStyle update(BeerStyle beerStyle, String id) throws ResourceNotFoundException {
+		if (!beerRepository.existsById(id)) {
+			throw new ResourceNotFoundException("BeerStyle does not exist");
+		}
 		beerStyle.setId(id);
-		return beerRepository.save(beerStyle);
+		beerStyle = beerRepository.save(beerStyle);
+		return beerStyle;
 	}
-	
-	public void remove(String id) {
+
+	public void remove(String id) throws ResourceNotFoundException {
+		if (!beerRepository.existsById(id)) {
+			throw new ResourceNotFoundException("BeerStyle does not exist");
+		}
 		beerRepository.deleteById(id);
 	}
-	
+
 }
