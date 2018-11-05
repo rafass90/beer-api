@@ -1,5 +1,4 @@
 # Beer-api:beers:  
-[![Build Status](https://travis-ci.org/rafass90/beer-api.svg?branch=master)](https://travis-ci.org/rafass90/beer-api)
 
 Ferramentas utilizadas no desenvolvimento do app:
   - Eclipse
