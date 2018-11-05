@@ -37,7 +37,7 @@ Para executar o projeto sem necessidade de instalar JDK, Gradle/maven:
 
   Requisitos: docker instalado
 
-  Comando: ``` docker run -p 5000:8080 rafass90/spring-boot-beer-api:0.0.2```
+  Comando: ``` docker run -p 5000:8080 rafass90/spring-boot-beer-api:1.0```
 
 Após download da imagem e start da aplicaço, a mesma ficará disponível no endereço `http://127.0.0.1:5000`.
 
@@ -47,7 +47,7 @@ Para esta aplicação, não foi adicionada nenhuma restrição de segurança/COR
 
 As branches develop e master estão utilizando base de dados diferentes. Ambas hospedadas no mLab.
 
-**Para deploy da aplicaço(no Heroku), basta publicar alteração na branch _MASTER_**
+**Para deploy da aplicação(no Heroku), basta publicar alteração na branch _MASTER_**
 
 - Commit no README.md :innocent:
 
