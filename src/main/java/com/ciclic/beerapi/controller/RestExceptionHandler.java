@@ -37,5 +37,4 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<ErrorDTO>(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
     
-    
 }
