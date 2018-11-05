@@ -3,11 +3,12 @@
 Ferramentas utilizadas no desenvolvimento do app:
   - Eclipse
   - JDK8
+  - Undertow(_as container_)
   - Gradle
   - Postman
   - Docker
   - Gradle
-
+  
 Soluções Cloud para hospedagem da solução:
 - Heroku(https://www.heroku.com/)
 - mLab(https://mlab.com/)
@@ -41,7 +42,7 @@ Para executar o projeto sem necessidade de instalar JDK, Gradle/maven:
 
   Requisitos: docker instalado
 
-  Comando: ``` docker run -p 5000:8080 rafass90/spring-boot-beer-api:1.0```
+  Comando: ``` docker run -p 5000:8080 rafass90/spring-boot-beer-api:latest```
 
 Após download da imagem e start da aplicaço, a mesma ficará disponível no endereço `http://127.0.0.1:5000`.
 
