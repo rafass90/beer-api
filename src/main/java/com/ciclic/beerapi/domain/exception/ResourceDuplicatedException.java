@@ -1,4 +1,4 @@
-package com.ciclic.beerapi.repository;
+package com.ciclic.beerapi.domain.exception;
 
 public class ResourceDuplicatedException extends Exception {
 
