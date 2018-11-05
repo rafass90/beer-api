@@ -15,16 +15,8 @@ public class BusinessDTO {
 		return beerStyle;
 	}
 
-	public void setBeerStyle(String beerStyle) {
-		this.beerStyle = beerStyle;
-	}
-
 	public PlaylistDTO getPlaylist() {
 		return playlist;
-	}
-
-	public void setPlaylist(PlaylistDTO playlist) {
-		this.playlist = playlist;
 	}
 
 }

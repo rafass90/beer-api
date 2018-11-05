@@ -57,7 +57,6 @@ public class BeerStyleController {
 
 	@PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Void> edit(@PathVariable("id") String id, @Valid @RequestBody BeerStyle beerStyle) throws Exception {
-		LOGGER.info(beerStyle.getId() + " " + beerStyle.getName() + " " +  beerStyle.getMaxTemperature() + " " +  beerStyle.getMinTemperature());
 		beerStyleService.update(beerStyle, id);
 		
 		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
