@@ -8,9 +8,9 @@ import org.springframework.stereotype.Service;
 
 import com.ciclic.beerapi.domain.dto.BusinessDTO;
 import com.ciclic.beerapi.domain.dto.PlaylistDTO;
+import com.ciclic.beerapi.domain.exception.ResourceNotFoundException;
 import com.ciclic.beerapi.domain.vo.BeerStyle;
 import com.ciclic.beerapi.domain.vo.BeerStyleWithTempDifference;
-import com.ciclic.beerapi.repository.ResourceNotFoundException;
 import com.wrapper.spotify.exceptions.SpotifyWebApiException;
 
 @Service
@@ -29,7 +29,7 @@ public class PubService {
 	public BusinessDTO beerWithMusic(Double temperature) throws ResourceNotFoundException, SpotifyWebApiException, IOException {
 		BeerStyle beerStyle = suggestIdealBeer(temperature);
 		if(beerStyle == null) {
-			throw new ResourceNotFoundException();
+			throw new ResourceNotFoundException("BeerStyles not found");
 		}
 		PlaylistDTO playlist = spotifyService.findPlaylistWith(beerStyle);
 

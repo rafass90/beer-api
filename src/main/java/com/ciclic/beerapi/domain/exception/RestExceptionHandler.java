@@ -1,4 +1,4 @@
-package com.ciclic.beerapi.controller;
+package com.ciclic.beerapi.domain.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,8 +9,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import com.ciclic.beerapi.domain.dto.ErrorDTO;
-import com.ciclic.beerapi.repository.ResourceDuplicatedException;
-import com.ciclic.beerapi.repository.ResourceNotFoundException;
 
 @ControllerAdvice
 @EnableWebMvc

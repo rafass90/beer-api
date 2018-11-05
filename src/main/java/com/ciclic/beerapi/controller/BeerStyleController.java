@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ciclic.beerapi.domain.exception.ResourceDuplicatedException;
+import com.ciclic.beerapi.domain.exception.ResourceNotFoundException;
 import com.ciclic.beerapi.domain.vo.BeerStyle;
-import com.ciclic.beerapi.repository.ResourceDuplicatedException;
-import com.ciclic.beerapi.repository.ResourceNotFoundException;
 import com.ciclic.beerapi.service.BeerStyleService;
 
 @RestController

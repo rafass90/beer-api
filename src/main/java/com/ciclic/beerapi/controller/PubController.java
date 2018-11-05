@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ciclic.beerapi.domain.dto.BusinessDTO;
-import com.ciclic.beerapi.repository.ResourceNotFoundException;
+import com.ciclic.beerapi.domain.exception.ResourceNotFoundException;
 import com.ciclic.beerapi.service.PubService;
 import com.wrapper.spotify.exceptions.SpotifyWebApiException;
 

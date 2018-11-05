@@ -6,10 +6,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ciclic.beerapi.domain.exception.ResourceDuplicatedException;
+import com.ciclic.beerapi.domain.exception.ResourceNotFoundException;
 import com.ciclic.beerapi.domain.vo.BeerStyle;
 import com.ciclic.beerapi.repository.BeerStyleRepository;
-import com.ciclic.beerapi.repository.ResourceDuplicatedException;
-import com.ciclic.beerapi.repository.ResourceNotFoundException;
 
 @Service
 public class BeerStyleService {
