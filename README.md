@@ -22,7 +22,7 @@ Frameworks utilizados:
 A api está disponível para consumo na plataforma cloud Heroku, através link:
 > https://ciclic-beer-api.herokuapp.com/
 
-Há dois arquivs na raiz do projeto(cyclic.postman.json e cyclic.postman-local.json) que podem ser importados no Postman para testes usando interface gráfica da API(necessário alterar a url).
+Há dois arquivs na raiz do projeto(cyclic.postman.json e cyclic.postman-local.json) que podem ser importados no Postman para testes usando interface gráfica.
 - O arquivo cyclic.postman.json aponta para o Heroku
 - O arquivo cyclic.postman-local.json aponta para localhost:8080
 
