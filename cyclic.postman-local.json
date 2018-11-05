@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "badced9e-7625-41c9-a45c-d7b45c1de698",
-		"name": "Teste Cyclic Heroku",
+		"_postman_id": "2a48d704-bf41-40c6-9963-50258cf1b2b4",
+		"name": "Teste Cyclic",
 		"description": "Requests para teste da Cyclic",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -47,15 +47,13 @@
 					"raw": "{ \n\"name\":\"Fervente\",\n\"minTemperature\":\"-99.99\",\n\"maxTemperature\":\"10.08\"\n}"
 				},
 				"url": {
-					"raw": "https://ciclic-beer-api.herokuapp.com//api/v1/admin/beers",
-					"protocol": "https",
+					"raw": "http://localhost:8080/api/v1/admin/beers",
+					"protocol": "http",
 					"host": [
-						"ciclic-beer-api",
-						"herokuapp",
-						"com"
+						"localhost"
 					],
+					"port": "8080",
 					"path": [
-						"",
 						"api",
 						"v1",
 						"admin",
@@ -82,13 +80,12 @@
 					"raw": "{ \n\"name\":\"DUNKEL\",\n\t\"minTemperature\":\"-8\",\n\t\"maxTemperature\":\"2\"\n}"
 				},
 				"url": {
-					"raw": "https://ciclic-beer-api.herokuapp.com/api/v1/admin/beers/5bdf282ca35dc469b4673507",
-					"protocol": "https",
+					"raw": "http://localhost:8080/api/v1/admin/beers/5bdf282ca35dc469b4673507",
+					"protocol": "http",
 					"host": [
-						"ciclic-beer-api",
-						"herokuapp",
-						"com"
+						"localhost"
 					],
+					"port": "8080",
 					"path": [
 						"api",
 						"v1",
@@ -117,13 +114,12 @@
 					"raw": "{ \"id\": \"5bdde68d48024f2e7e4da4da\",\n\"name\":\"IPA\",\n\t\"minTemperature\":\"-2.0\",\n\t\"maxTemperature\":\"2\"\n}"
 				},
 				"url": {
-					"raw": "https://ciclic-beer-api.herokuapp.com/api/v1/admin/beers/5bdf282ca35dc469b4673507",
-					"protocol": "https",
+					"raw": "http://localhost:8080/api/v1/admin/beers/5bdf282ca35dc469b4673507",
+					"protocol": "http",
 					"host": [
-						"ciclic-beer-api",
-						"herokuapp",
-						"com"
+						"localhost"
 					],
+					"port": "8080",
 					"path": [
 						"api",
 						"v1",
@@ -152,13 +148,12 @@
 					"raw": "{ \"name\":\"IPA\",\n\t\"minTemperature\":\"-2.0\",\n\t\"maxTemperature\":\"2\"\n}"
 				},
 				"url": {
-					"raw": "https://ciclic-beer-api.herokuapp.com/api/v1/admin/beers",
-					"protocol": "https",
+					"raw": "http://localhost:8080/api/v1/admin/beers",
+					"protocol": "http",
 					"host": [
-						"ciclic-beer-api",
-						"herokuapp",
-						"com"
+						"localhost"
 					],
+					"port": "8080",
 					"path": [
 						"api",
 						"v1",
@@ -186,13 +181,12 @@
 					"raw": "{ \"name\":\"IPA\",\n\t\"minTemperature\":\"-2.0\",\n\t\"maxTemperature\":\"2\"\n}"
 				},
 				"url": {
-					"raw": "https://ciclic-beer-api.herokuapp.com/api/v1/beers/temperature/1",
-					"protocol": "https",
+					"raw": "http://localhost:8080/api/v1/beers/temperature/1",
+					"protocol": "http",
 					"host": [
-						"ciclic-beer-api",
-						"herokuapp",
-						"com"
+						"localhost"
 					],
+					"port": "8080",
 					"path": [
 						"api",
 						"v1",
