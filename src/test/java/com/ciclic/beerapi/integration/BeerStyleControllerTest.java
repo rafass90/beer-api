@@ -9,38 +9,23 @@ import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
-import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.ciclic.beerapi.BeerApiApplication;
 import com.ciclic.beerapi.domain.vo.BeerStyle;
-import com.ciclic.beerapi.repository.BeerStyleRepository;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = BeerApiApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@TestPropertySource("classpath:application-dev.properties")
-public class BeerStyleControllerTest{
-    
-	@LocalServerPort
-    private Integer port;
 
-    @Autowired
-    private BeerStyleRepository beerStyleRepository;
+public class BeerStyleControllerTest extends ControllerTest{
+    
 
 	@Test
 	public void givenBeerStyleToAdd_thenStatusCreatedIsReceived() throws ClientProtocolException, IOException {
@@ -56,7 +41,7 @@ public class BeerStyleControllerTest{
 		// Then
 		assertThat(httpResponse.getStatusLine().getStatusCode(), is(HttpStatus.SC_CREATED));
 		
-		beerStyleRepository.deleteById(idCreated);
+		deleteTestById(idCreated);
 	}
 
 	@Test
@@ -93,7 +78,7 @@ public class BeerStyleControllerTest{
 	@Test
 	public void givenBeerStyleExisting_thenStatusReceivedIsOK() throws ClientProtocolException, IOException {
 		// Given
-		BeerStyle bStyle = beerStyleRepository.insert(new BeerStyle("test", -1.0, 1.0));
+		BeerStyle bStyle = insertTest("test");
 		HttpGet request = new HttpGet("http://localhost:"+port+"/api/v1/admin/beers/" + bStyle.getId());
 
 		// When
@@ -135,7 +120,7 @@ public class BeerStyleControllerTest{
 	@Test
 	public void givenBeerStyleExisting_whenDelete_thenStatusReceivedIsNoContent() throws ClientProtocolException, IOException {
 		// Given
-		BeerStyle bStyle = beerStyleRepository.insert(new BeerStyle("test", -1.0, 1.0));
+		BeerStyle bStyle = insertTest("test");
 		HttpDelete request = new HttpDelete("http://localhost:"+port+"/api/v1/admin/beers/" + bStyle.getId());
 
 		// When
@@ -157,18 +142,6 @@ public class BeerStyleControllerTest{
 		assertThat(httpResponse.getStatusLine().getStatusCode(), is(HttpStatus.SC_NOT_FOUND));
 	}
 	
-	private CloseableHttpResponse executeRequest(HttpRequestBase request) throws IOException, ClientProtocolException {
-		return HttpClientBuilder.create().build().execute(request);
-	}
-	
-	private void deleteTestById(String id) {
-		beerStyleRepository.deleteById(id);
-	}
-
-	private BeerStyle insertTest(String name) {
-		return beerStyleRepository.insert(new BeerStyle(name, -1.0, 1.0));
-	}
-
 	private StringEntity createPostBody(String name, Double minTemperature, Double maxTemperature) {
 		StringBuilder stringBuilder = new StringBuilder();
 		stringBuilder.append("{ \n");
